@@ -1,0 +1,44 @@
+<section data-ng-controller="StocksController" data-ng-init="findOne()">
+	<div class="page-header">
+		<h1 data-ng-bind="stock.name"></h1>
+		<em class="text-muted">
+			Stock del
+			<span data-ng-bind="stock.stockDate | date:'dd MMM yyyy'"></span>
+			por
+			<span data-ng-bind="stock.user.displayName"></span>
+		</em>
+	</div>
+
+	<div class="row">
+		<div class="col-lg-6">
+			<p class="lead" data-ng-bind="stock.details"></p>
+		</div>
+		<table class="table table-stripped">
+			<tr>
+				<th>Marca</th>
+				<th>Estilo</th>
+				<th>Cantidad</th>
+			</tr>
+			<tr ng-repeat="item in stock.stockItems">
+				<td>
+				    {{ item.brand }}
+				</td>
+				<td>
+				    {{ item.beerStyle }}
+				</td>
+				<td>
+				    {{ item.amount }}
+				</td>
+			</tr>
+		</table>
+	</div>
+
+		<div class="pull-right" data-ng-show="authentication.user._id == stock.user._id">
+			<a class="btn btn-primary" href="/#!/stocks/{{stock._id}}/edit">
+				<i class="glyphicon glyphicon-edit"></i>
+			</a>
+			<a class="btn btn-primary" data-ng-click="remove();">
+				<i class="glyphicon glyphicon-trash"></i>
+			</a>
+		</div>
+</section>
